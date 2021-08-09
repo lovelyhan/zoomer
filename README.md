@@ -17,11 +17,11 @@ To apply Zoomer to your own data, please:
 
 - Configure ```model/xdl2_runner_zoomer_base_train.json```.
 - Set the hyperparameters of the model in ```model/zoomer_model_config.py```.
-- ROI-based Multi-Level Attention in this paper contains three major attention mechanisms: a flexible node-level feature embedding projection, an edge-level neighbor reweighing, and a semantic-level relation combination. you can enable or disable these attentions in ```model_option```.
+- ROI-based Multi-Level Attention in this paper contains three major attention mechanisms: a flexible node-level feature embedding projection, an edge-level neighbor reweighing, and a semantic-level relation combination. You can enable or disable these attentions in ```model_option```.
 
 ## Data
 
-- We used Alibaba's internal data and built our own industrial dataset in the experiment. Due to data security reasons, we can not disclose the data we use.
+- We used Alibaba's internal data and built our own industrial dataset in the experiment. Due to user privacy concerns and data security reasons, we can not disclose the data we use.
 - You can apply Zoomer to your own datasets by following our input data's format. 
 
 ### Input Data Format
