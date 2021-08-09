@@ -1,0 +1,95 @@
+{
+    "job_name": "kgb_match_cy_zoomer_${bizdate}",
+    "job_type": "train",
+    "dependent_dirs": "${root_dir}",
+    "docker_image": "reg.docker.alibaba-inc.com/pai-tensorflow/tensorflow-build:1.12.2-PAI2006-104315.672856.83278273-gpu_cuda10",
+    "cpu_optimize": true,
+    "script": "./xdl2_runner_zoomer_base_train.py",
+    "auto_config": true,
+    "user": "${user}",
+    "super_power": true,
+    "scheduler_queue":"${queue}",
+    "worker": {
+      "instance_num": 10,
+      "cpu_cores": 15,
+      "gpu_cores": 0,
+      "memory_m": 80000
+    },
+    "ps": {
+      "instance_num": 40,
+      "cpu_cores": 15,
+      "gpu_cores": 0,
+      "memory_m": 80000
+    },
+    "extend_role": {
+        "euler": {
+          "instance_num": 10,
+          "shard_num": 10,
+          "cpu_cores": 10,
+          "gpu_cores": 0,
+          "memory_m": 80000,
+          "data_dir": "${graph_server_path}",
+          "script": "./model/runner/start_euler.py",
+          "zk_addr": "search-zk-na61-alimm-euler.vip.tbsite.net:2181"
+        }
+    },
+    "reader": {
+      "batch_size": 1024,
+      "thread_num": 10,
+      "epochs_num": 2,
+      "work_queue": false,
+      "save_interval_steps": 100000,
+      "reader_type": "odps",
+      "data_dir": "${input_sample_path}",
+      "use_data_prefetch": false
+    },
+    "odps_table": "${input_sample_path}",
+    "checkpoint": {
+        "output_dir": "${output_dir}/xdl2_train/raw_model",
+        "save_interval_steps": 100000,
+        "max_to_keep": 3,
+        "replica": 3
+    },
+    "summary": {
+        "output_dir": "${output_dir}/xdl2_train/summary",
+        "save_interval_steps": 100000
+    },
+    "auc": {
+      "auc_type": "train_auc",
+      "auc_checkpoint_model": "latest",
+      "auc_threshold": 0.5,
+      "auc_score_output_dir": "${output_dir}/xdl2_train/auc"
+    },
+    "optimizers": {
+      "scope_optimizer": [{
+        "lr_decay_rate": 1,
+        "name": "Adagrad",
+        "scopes": "",
+        "learning_rate": 0.1
+      }],
+      "global_optimizer": {
+        "lr_decay_rate": 1,
+        "name": "Adagrad",
+        "learning_rate": 0.1
+      },
+      "SyncReplicasOpt": false
+    },
+    "profiler": {
+      "save_interval_steps": 100000,
+      "output_dir": "${output_dir}/xdl2_train/profiler"
+    },
+    "embedding_strategy": {
+      "meta_partitioner": false,
+      "meta_dir": "${output_dir}/xdl2_train/meta",
+      "save_interval_steps": 100000,
+      "embedding_read_only": false,
+      "embedding_default_type": 0
+    },
+    "log_step": 10,
+    "auc_bucket_num": 5000,
+    "auc_decay_rate": 1.0,
+    "chief_finish_report":true,
+    "min_finish_worker_rate": 95,
+    "max_failover_times": 100,
+    "max_failover_wait_secs": 1000
+  }
