@@ -22,11 +22,7 @@ To apply Zoomer to your own data, please:
 ## Data
 
 - We used Alibaba's internal data and built our own industrial dataset in the experiment. Due to data security reasons, we can not disclose the data we use.
-- You can apply Zoomer to your own datasets by following our input dat's format. 
-- We conduct our experiment on three heterogeneous graph of different scales:
-  - million-scale-graph: contains 2 million nodes, 400 million edges;
-  - hundred-billion-scale-graph: contains 120 million, 30 billion edges;
-  - million-scale-graph: contains 1.2 billion nodes, 260 billion edges.
+- You can apply Zoomer to your own datasets by following our input data's format. 
 
 ### Input Data Format
 
@@ -59,4 +55,4 @@ python xdl2_runner_zoomer_base_train.py
 ## References
 
 - [XDL](https://github.com/alibaba/x-deeplearning)
-- [Euler](
+- [Euler](https://github.com/alibaba/euler)
