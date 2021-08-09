@@ -41,7 +41,6 @@ python xdl2_runner_zoomer_base_train.py
 | user_id        | int64   | ID of the user                                               |
 | item_id        | int64   | ID of the item                                               |
 | labels         | float32 | value equals to 0 or 1, indicating whether user clicks item under the given query. |
-| node_embedding | float32 | embedding for the node in embedding table                    |
 
 - Graph data
 
